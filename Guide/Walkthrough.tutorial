@@ -1,0 +1,323 @@
+@GuideBook(title: "Magic 8 Ball", icon: magic8Ball.png, background: intro.png, firstFile: MyApp.swift) {
+    @WelcomeMessage(title: "Magic 8 Ball") {
+        Use arrays to create background gradients and supply answers to user questions in the Magic 8 Ball project.  
+    }
+    @Guide {
+        
+        @Step(title: "Magic 8 Ball") {
+            
+            @ContentAndMedia {
+               ![](logoarrays.png)
+                Welcome to the Magic 8 Ball app!
+                
+                In this project you will create an app in which the user types a yes or no question and the Magic 8 Ball displays an answer.
+                
+                Some code is already in place to get you started. Click on the rectangle icon on the top right side of this screen to see what the app looks like now. You can then tap the books icon to return to the tutorial.
+                
+                ![](icons.png)
+                
+                You will need to add some modifiers in order to improve the layout of the app. You will also write code that allows the Magic 8 Ball to display an answer from the answers array. By the time you are finished, the app will look much better and behave as expected.
+               
+                @GuideButton(type: walkthrough, title: "Start Walkthrough", description: "button description")
+            }
+            
+            @TaskGroup(title: "Project Walkthrough") {
+                @Task(type: walkthrough, title: "Project Files", id: "files", file: MyApp.swift) {
+                    Looking at the project files
+                    @Page(id: "examineFiles", title: "") {
+                        If you look at the panel to the left, you will see all of the files used in the project. MyApp.swift is the entry point of the app. ContentView.swift is where you will write code for this project.
+                    }
+                    @Page(id: "myApp", title: "") {
+                        Now take a look at the code in the MyApp.swift file below.
+                        The import statement imports the SwiftUI framework so that this app has access to all of the features that SwiftUI offers.
+                    }
+                    @Page(id: "main", title: "") {
+                        The @main declaration makes this file the entry point for the app. Important: There can only be one entry point to the app.  
+                    }
+                    @Page(id: "content", title: "") {
+                        Notice ContentView() inside of the body of the App. Because MyApp is the entry point, it needs to tell the app which other views will need to be displayed. A larger app will have several views, not just the ContentView.
+                    }
+                }
+            
+                @Task(type: walkthrough, title: "ContentView.swift", id: "contentView", file: ContentView.swift) {
+                    What's inside the ContentView.swift file?
+                    @Page(id: "struct", title: "") {
+                            Code for the ContentView is contained inside the curly braces of the ContentView struct.  
+                    }
+                    @Page(id: "variables", title: "") {
+                           Variables for the text field, user question and 8 Ball's answer are listed at the top. A variable called answers represents the answer array. These variables store values we need for the app and let us refer to them by name in code. 
+                    }
+                    @Page(id: "state", title: "") {
+                        The [@State](doc://com.apple.documentation/documentation/swiftui/state) wrapper lets us modify the values inside of a struct, which is not normally allowed inside of structs. The private designation means these variables can only be used inside of this view (ContentView) and not other views in the app.
+                    }
+                }
+                
+                @Task(type: walkthrough, title: "VStack", id: "vstack", file: ContentView.swift) {
+                    A VStack contains a vertical stack of views.
+                    @Page(id: "text", title: "") {
+                        Inside the body of the ContentView is a [VStack](doc://com.apple.documentation/documentation/swiftui/vstack) that contains other subviews inside of it. A VStack is a view that arranges its subviews vertically (up and down) rather than horizontally (side by side). The first item in the VStack is text that says Magic 8 Ball. 
+                    }
+                    @Page(id: "zstack", title: "") {
+                        The next item in the VStack is a [ZStack](doc://com.apple.documentation/documentation/swiftui/zstack). This ZStack contains an image for the Magic 8 Ball and the text that is displayed on top of it. A ZStack lets the text live on top of the image rather than above or below it like in a VStack, or beside it like in an HStack.
+                    }
+                    @Page(id: "resizable", title: "") {
+                       If you look in the code file beneath the Magic 8 Ball Image you will see .resizable(). Put two slash marks // in front of .resizable() to comment it out. What happens? Take away the // to un-comment the code. Using .resizable() lets you tell the image what size it should be.
+                    }
+                    @Page(id: "frameSize", title: "") {
+                       The .frame beneath the ZStack sets the size for the whole ZStack, which includes the image.
+                    }
+                    @Page(id: "bottomstack", title: "") {
+                        The final section in the ContentView is another VStack. It contains a textfield where the user will type a question. A button is used to submit the question. Text at the top of the VStack will show the question when the user taps the submit button. We still have some work to do in this section.
+                    }
+                }
+            }
+            
+            @TaskGroup(title: "App Layout") {
+                @Task(type: experiment, title: "Background Color", id: "background", file: ContentView.swift) {
+                    Changing the background color
+                    @Page (id: "location", title: "") {
+                        Right now the background is very plain. The background color can be changed by adding a modifier to the VStack. If you hover over the VStack's curly brace it will highlight where the VStack ends. The code goes below the closing curly brace of the VStack and above the last 2 curly braces in the ContentView.
+                    }
+                    @Page(id: "orangeBackground", title: "", isAddable: true) {
+                        Try adding a .background modifier to the bottom of the outermost VStack to give app a background a color:
+                        ```
+                        .background(.orange)
+                        ```
+                    }
+                }
+                
+                @Task(type: experiment, title: "Frame Size", id: "frame", file: ContentView.swift) {
+                    Adjusting the background size
+                    @Page(id: "newModifier", title: "") {
+                        Wait!  The background color didn't cover the whole background. The .frame modifier can be used to specify a maximum width and a maximum height. 
+                    }
+                    @Page(id: "frameBackground", title: "", isAddable: true) {
+                        Add the .frame modifier just above where you added the background color of the VStack. Set the max width and max height to .inifinity.
+                        ```
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        ```
+                    }
+                }
+                    
+               @Task(type: experiment, title: "Padding", id: "padding", file: ContentView.swift) {
+                   The padding modifier adds space between views
+                   @Page(id: "textPadding", title: "", isAddable: true) {
+                       Notice how the title, image, text view and button are too close together? Add the [padding](doc://com.apple.documentation/documentation/swiftui/view/padding(_:_:)) modifier to the Magic 8 Ball to provide padding between it and the image beneath it.
+                       ```
+                       .padding(.bottom, 25)
+                       ```
+                   }
+                   @Page(id: "textFieldPadding", title: "", isAddable: true) {
+                       Add space between items in the final VStack by using the .padding modifier on the text field. If you don't specify .top or .bottom, it will add padding to both the top and bottom of a VStack. 
+                       ```
+                       .padding(25)
+                       ```
+                   }
+                   @Page(id: "hstack", title: "", isAddable: false) {
+                       When you are using an HStack instead of a VStack, adjust the padding for the .leading and .trailing edges (left and right) instead of .top and .bottom. VStacks arange views vertically and [HStacks](doc://com.apple.documentation/documentation/swiftui/hstack) arrange views horizontally.
+                   }
+               }
+            }
+            
+            @TaskGroup(title: "Text Modifiers") {
+                @Task(type: experiment, title: "Text Modifier", id: "text", file: ContentView.swift) {
+                    Adjust the text size and font
+                    @Page(id: "largeTitle", title: "", isAddable: true) {
+                        Find the "Magic 8 Ball" Text in your code. Use the .font modifier to adjust the size of the text.
+                        ```
+                        .font(.largeTitle)
+                        ```
+                    }
+                    @Page(id: "bold", title: "", isAddable: true) {
+                        Use .bold to make the text bold.
+                        ```
+                        .bold()
+                        ```
+                    }
+                }
+            }
+            
+            @TaskGroup(title: "Functionality") {
+                @Task(type: walkthrough, title: "Text Field", id: "textfield", file: ContentView.swift) {
+                   Using the text field
+                    @Page(id: "placeholdertext", title: "") {
+                       Take a look at the [text field](doc://com.apple.documentation/documentation/swiftui/textfield) provided. The first string "Enter your question" is placeholder text you provide to let the user know the text field's purpose.
+                    }
+                    @Page(id: "binding", title: "") {
+                        Notice the $ symbol before the textField variable. That binding prefix means that when text is entered, it passes a [binding](doc://com.apple.documentation/documentation/swiftui/binding) of the @State property into the textField's binding property. When text is typed into the text field it will be stored using the textField variable.
+                    }
+                    @Page(id: "label", title: "") {
+                       Just above the text field is Text(question). This is used to display the question the user types into the text field.
+                    }
+                    @Page(id: "button", title: "") {
+                        Below the text field is a [button](doc://com.apple.documentation/documentation/swiftui/button). The button contains an action and a label. The code for the action goes in between the curly braces. That's where you will tell the button what to do when it is pressed.
+                    }
+                }
+            }
+            
+            @TaskGroup(title: "Button Appearance") {
+                @Task(type: experiment, title: "Submit Button", id: "button", file: ContentView.swift) {
+                    Setting up the button
+                    @Page (id: "buttonBackground", title: "", isAddable: true) {
+                        Right now the button is small, blue text. What if you want the button to stand out more?  Add modifiers to the button to make the text larger and give it a background color. Using .clipShape lets you modify the shape of the button.
+                   ```
+                   .foregroundStyle(.white)
+                   .background(.blue)
+                   .clipShape(Capsule())
+                   .font(.title)
+                   ```
+                    }
+                    @Page(id: "frameMod", title: "", isAddable: true) {
+                        The frame modifier is used to adjust the height and width of the button. Adding padding() will give a little space around the title. NOTE:  Placement matters. The frame and padding needs to go above the rest of the button's modifiers to achieve the desired effect. Feel free to test this out.
+                        ```
+                        .frame(width: 350, height: 50)
+                        .padding()
+                        ```
+                    }
+                    @Page(id: "customB", title: "", isAddable: false) {
+                        You were able to change the appearance of the button by adding several modifiers. But what if you want to re-use your button in several places in your app? Will you need to write all of that code every time you make a button?
+                    }   
+                    @Page(id: "customBut", title: "", isAddable: false) {
+                       There is a file included in the project called CustomButton. If you look inside of it you will see that it contains many of the same properties you added to the button. The .opacity modifier specifies a percentage of transparency the button will have. It is optional.
+                    }   
+                    @Page(id: "customButton", title: "", isAddable: true) {
+                        To use the custom button instead, DELETE all of the modifiers you just added to the button and replace it with the following line of code instead:
+                        ```
+                        .buttonStyle(CustomButton())
+                        ```
+                    }
+                    @Page(id: "customButton", title: "", isAddable: false) {
+                       If you want to, you can change the size, color and opacity of the button in the CustomButton file so that the button looks the way you like.
+                    } 
+                }
+            }
+        
+            @TaskGroup(title: "Button Action") {
+                @Task(type: experiment, title: "Button Action", id: "buttonAction", file: ContentView.swift) {
+                    Adding the button's action
+                    @Page(id: "questionVariable", title: "") {
+                        What needs to happen when the button is pressed? First, it needs to display the question that the user typed. Find the code for Text that is located just above the text field.  It will show the value for answer, which is currently set to an empty string.
+                    }
+                    @Page (id: "questionText", title: "", isAddable: true) {
+                       If you set the question variable equal to the textField variable in the button's action, it will display whatever is typed in the text field each time the button is pressed.
+                        ```
+                        question = textField
+                        ```
+                    }
+                    @Page (id: "questionTest", title: "", isAddable: false) {
+                        Take a minute to test the text field to see that it displays text each time the button is pressed.
+                    }
+                    @Page (id: "answerText", title: "", isAddable: false) {
+                        After the question is submitted, the 8 Ball needs to show an answer in its label.  Notice the @State variable called answer at the top of the file.  It is passed in to the Magic 8 Ball's text label. To display the answer, you will set the answer variable equal to the answer that the Magic 8 Ball gives. 
+                    }
+                    @Page (id: "random", title: "", isAddable: true) {
+                        Where does the Magic 8 Ball get it's answers?  From the answers array. By using .randomElement() you can get a random answer from the answer [array](doc://com.apple.documentation/documentation/swift/array) each time the submit button is pressed. The ?? symbol after the [randomElement()](doc://com.apple.documentation/documentation/swift/array/randomelement()) allows us to provide a default answer in case something goes wrong with the answer array.
+                        ```
+                        answer = answers.randomElement() ?? "Something went wrong"
+                        ```
+                    }
+                    @Page (id: "reset", title: "", isAddable: true) {
+                       Finally, reset the text field by setting it equal to an empty string.
+                        ```
+                        textField = ""
+                        ```
+                    }
+                    @Page (id: "randomTest", title: "", isAddable: false) {
+                        Take a minute to test to see that an answer is displayed and the text field resets each time the button is pressed.
+                    }
+                    @Page (id: "oneAnswer", title: "", isAddable: false) {
+                        Did you notice that only one answer is shown by the 8 Ball each time the button is pressed?  Look at the code and see if you can figure out why.  Where are the answers for the 8 Ball stored?
+                    }
+                }
+            }
+            @SuccessMessage(message: "") {
+                Excellent work! 
+                
+                Next, you'll learn how to use an array to provide answers for the 8 ball and to add background gradients to the app. 
+            }
+        }
+        
+        @Step(title: "Working with Arrays") {
+            @ContentAndMedia {
+                
+                Magic 8 Ball app uses an array to store all of the Magic 8 Ball answers. An [array](doc://com.apple.com.documentation/documenation/swift/array) in Swift is an ordered collection of items of the same data type. 
+                
+                ![](pocketArray.png)
+                
+                The pocketContents array above contains a list of strings describing items in someone's pocket. In the Magic 8 Ball app, the answers array is also an array of strings. You can recognize an array in Swift because it is enclosed in square brackets. The quotation marks around each item in the array lets you know that it is an array of strings.
+                
+                @GuideButton(type: walkthrough, title: "Start Walkthrough", description: "button description")
+               
+            }
+            @TaskGroup(title: "Answers Array") {
+                @Task(type: walkthrough, title: "Answers", id: "aa", file: ContentView.swift) {
+                    Adding answers
+                    @Page(id: "answerArray", title: "") {
+                       Why does the 8 Ball always say "Without a doubt" each time the button is pressed? Because it is the only answer in the answers array.
+                    }
+                    @Page(id: "answerArray2", title: "") {
+                       Think of more answers and add them to the array. Make sure that you enclose your answers in quotation marks and separate each answer with a comma. All of the answers in the array should be included inside of its square brackets.
+                    }
+                    @Page(id: "testArray", title: "") {
+                       Once you have added new answers to the array, test the app to see if the 8 Ball selects new random answers each time the button is pressed.
+                    }
+                }
+            }
+            @TaskGroup(title: "Background Gradient") {
+                @Task(type: experiment, title: "Color Arrays", id: "backgroundGradient", file: ContentView.swift) {
+                    Background Gradient
+                    @Page(id: "bgGradient", title: "", isAddable: true) {
+                        You can also use an array of colors to create a background [gradient](doc://com.apple.documentation/documentation/swiftui/gradient) for your app. DELETE the .background(.orange) modifier. Replace it with the code for a radial gradient: 
+                        ```
+                        .background {
+                            RadialGradient(colors: [.blue, .indigo, .purple, .indigo, .blue], 
+                                center: .topLeading, startRadius: 350, endRadius: 1500)
+                            .ignoresSafeArea(.all)
+                        }
+                        ```
+                    }
+                    @Page(id: "backgroundGradientArray", title: "", isAddable: false) {
+                        Try changing the colors in the color array of the gradient. How does it look with just two colors? Six colors? Experiment with the startRadius and endRadius.
+                    }
+                    @Page(id: "ignores", title: "", isAddable: false) {
+                        When you added code for the gradient, you also added ignoresSafeArea(all). The safe area helps keep your views inside of the visible area of the screen.  For example, you wouldn't want a button to be hidden behind a navigation bar.
+                    }
+                    @Page(id: "shadowFont", title: "", isAddable: true) {
+                        Now let's try to improve the title of the app by adding a gradient to the text. First, make the text stand out more. DELETE the .largeTitle modifier and add a larger font:
+                        ```
+                        .font(.system(size: 75))
+                        ```
+                    }
+                    @Page(id: "titleGradient", title: "", isAddable: true) {
+                        Now add code for a linear gradient.  
+                        ```
+                        .foregroundStyle(LinearGradient(
+                            colors: [.white, .blue],
+                            startPoint: .top,
+                            endPoint: .bottom
+                            )
+                        )
+                        ```
+                    }
+                    @Page(id: "shadow", title: "", isAddable: true) {
+                        Adding a shadow will make it stand out a bit more.
+                        ```
+                        .shadow(radius: 2)
+                        ```
+                    }
+                }
+            }
+            @SuccessMessage(message: "") {
+                
+                Congratulations! 
+                    
+                You've completed the Magic 8 Ball!  
+                
+                   Now it's time to create your own app. Can you think of an app idea that makes use of an array along with .randomElement() to accomplish a task?
+            }
+        }
+    }
+}
+
+
+
